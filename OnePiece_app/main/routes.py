@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from datetime import date, datetime
 from flask_login import login_required, current_user
-from OnePiece_app.models import Affiliation, Character, User
+from OnePiece_app.models import Affiliation, Character, User, CharacterWithDevilFruit, CharacterWithHaki
 from OnePiece_app.main.forms import AffiliationForm, CharactersForm
 from OnePiece_app.extensions import db
 
@@ -14,8 +14,12 @@ main = Blueprint("main", __name__)
 @main.route('/')
 def homepage():
     all_affiliations = Affiliation.query.all()
+    all_haki_characters = Character.query.filter(Character.haki != 'No').all()
+    all_devilfruit_characters = Character.query.filter(Character.devil_fruit != 'No').all()
     print(current_user)
-    return render_template('home.html', all_affiliations=all_affiliations)
+    return render_template('home.html', all_affiliations=all_affiliations,
+                            all_haki_characters=all_haki_characters, 
+                            all_devilfruit_characters=all_devilfruit_characters)
 
 @main.route('/new_affiliation', methods=['GET', 'POST'])
 @login_required
@@ -41,8 +45,10 @@ def new_character():
     if form.validate_on_submit():
         new_character = Character(
             name=form.name.data,
-            # category=form.category.data,
+            category=form.category.data,
             affiliation=form.affiliation.data,
+            devil_fruit=form.devil_fruit.data,
+            haki=form.haki.data,
             created_by_id=current_user.id
         )
         db.session.add(new_character)

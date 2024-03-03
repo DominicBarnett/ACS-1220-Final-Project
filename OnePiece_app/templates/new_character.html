@@ -18,9 +18,36 @@
 
         {{ form.category.label }}
         {{ form.category }}
+        <ul>
+            {% for error in form.category.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+    
 
         {{ form.affiliation.label }}
         {{ form.affiliation }}
+        <ul>
+            {% for error in form.affiliation.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+    
+
+        {{ form.devil_fruit.label }}
+        {{ form.devil_fruit }}
+        <ul>
+            {% for error in form.devil_fruit.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {{ form.haki.label }}
+        {{ form.haki }}
+        <ul>
+            {% for error in form.haki.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
 
         {{ form.submit }}
     </fieldset>

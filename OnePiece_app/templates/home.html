@@ -13,9 +13,41 @@
     {% if affiliation.characters %}
         {{ affiliation.characters|length }}
     {% else %}
-        No items
+        No characters yet
     {% endif %}
 </div>
 {% endfor %}
+
+<h2>Characters with Haki</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for character in all_haki_characters %}
+    <tr>
+      <td>{{ character.name }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Characters with Devil Fruits</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for character in all_devilfruit_characters %}
+    <tr>
+      <td>{{ character.name }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}

@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, FloatField, SelectField, SubmitField
+from wtforms import StringField, DateField, FloatField, SelectField, SubmitField, SelectMultipleField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, NumberRange
-from OnePiece_app.models import AffiliationCategory, Affiliation, Character
+from OnePiece_app.models import AffiliationCategory, Affiliation, Character, DevilFruitCategory, HakiCategory
 
 class AffiliationForm(FlaskForm):
     """Form for adding/updating a GroceryStore."""
@@ -22,4 +22,6 @@ class CharactersForm(FlaskForm):
                        ])
     category = SelectField('Category', choices=AffiliationCategory.choices())
     affiliation = QuerySelectField('affiliation', query_factory=lambda: Affiliation.query.all(), get_label='title')
+    devil_fruit = SelectField('Category', choices=DevilFruitCategory.choices())
+    haki = SelectField('Category', choices=HakiCategory.choices())
     submit = SubmitField('Submit') 
