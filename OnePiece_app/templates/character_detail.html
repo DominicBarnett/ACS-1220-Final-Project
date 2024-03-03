@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>character - {{ character.name }}</h1>
+
+<form method="POST" action="/add_to_favorite_character_list/{{ character.id }}">
+    <button type="submit">Add to favorite character List</button>
+</form>
+
+<p><strong>Category:</strong> {{ character.category }}</p>
+
+<p><strong>Affiliation:</strong> {{ character.affiliation.title }}</p>
+
+
+<h2>Edit character</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+
+
+        <!-- TODO: Remove the next paragraph and use the `form` object passed in 
+            from the route to render a form. -->
+        {{ form.name.label }}
+        {{ form.name }}
+        <ul>
+        {% for error in form.name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.category.label }}
+        {{ form.category }}
+        <br>
+        <br>
+
+        {{ form.affiliation.label }}
+        {{ form.affiliation }}
+        <br>
+        <br>
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+<p>character created by: {{ character.created_by.username }}</p>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>New Character</h1>
+
+<form method="POST" action="{{ url_for('main.new_character')}}">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+        {{ form.name.label }}
+        {{ form.name }}
+        <ul>
+        {% for error in form.name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.category.label }}
+        {{ form.category }}
+
+        {{ form.affiliation.label }}
+        {{ form.affiliation }}
+
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+{% endblock %}

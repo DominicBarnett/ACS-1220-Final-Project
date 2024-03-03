@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Favorite Characters List</h1>
+
+{% for character in character_list %}
+<div class="item-details">
+    <a href="/characters/{{ character.id }}">
+        <p><strong>{{ character.name }}</strong></p>
+    </a>
+    <form method="POST" action="/delete_from_favorite_characters_list/{{ character.id }}">
+        <input type="submit" value="Remove character">
+    </form>
+</div>
+{% endfor %}
+
+{% endblock %}

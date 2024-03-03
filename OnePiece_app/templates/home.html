@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>One Piece Character Tracker</h1>
+
+<p><em>The best place to track what affiliation your favorite One Piece character is a part of</em></p>
+
+<h2>All affiliations</h2>
+
+{% for affiliation in all_affiliations %}
+<div class="affiliation">
+    <a href="/affiliation/{{ affiliation.id }}">{{ affiliation.title }}</a> -
+    {% if affiliation.characters %}
+        {{ affiliation.characters|length }}
+    {% else %}
+        No items
+    {% endif %}
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Affiliation - {{ affiliation.title }}</h1>
+
+<h2>Characters</h2>
+
+<div class="character">
+    {% for character in affiliation.characters %}
+    <div class="character-details">
+        <a href="/characters/{{ character.id }}">
+            <p><strong>{{ character.name }}</strong></p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Edit Affiliation</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+        {{ form.title.label }}
+        {{ form.title }}
+        <ul>
+        {% for error in form.title.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+<p>Group entered by: {{ affiliation.created_by.username }}</p>
+
+{% endblock %}
