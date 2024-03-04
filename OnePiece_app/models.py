@@ -1,7 +1,7 @@
 from sqlalchemy import PrimaryKeyConstraint
 from sqlalchemy_utils import URLType
 from flask_login import UserMixin
-from OnePiece_app.extensions import db
+from OnePiece_app import db
 from OnePiece_app.utils import FormEnum
 
 class AffiliationCategory(FormEnum):

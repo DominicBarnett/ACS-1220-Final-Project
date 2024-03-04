@@ -1,12 +1,14 @@
+from dotenv import load_dotenv
+load_dotenv()
 import os
 import pytest
 from sqlalchemy.exc import IntegrityError
 from flask import Flask
-from OnePiece_app.extensions import db
+from OnePiece_app import db, app
 from OnePiece_app.models import Affiliation, Character, User
-from dotenv import load_dotenv
 
-load_dotenv()
+
+
 
 @pytest.fixture(scope='module')
 def app():

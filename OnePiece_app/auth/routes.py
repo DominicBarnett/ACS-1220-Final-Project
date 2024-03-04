@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from OnePiece_app.models import User
 from OnePiece_app.auth.forms import SignUpForm, LoginForm
-from OnePiece_app.extensions import app, db, bcrypt
+from OnePiece_app import app, db, bcrypt
 
 auth = Blueprint("auth", __name__)
 

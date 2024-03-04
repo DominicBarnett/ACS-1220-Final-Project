@@ -1,4 +1,4 @@
-from OnePiece_app.extensions import app, db
+from OnePiece_app import app, db
 from OnePiece_app.main.routes import main
 from OnePiece_app.auth.routes import auth
 

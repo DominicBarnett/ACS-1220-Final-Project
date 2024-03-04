@@ -3,7 +3,7 @@ from datetime import date, datetime
 from flask_login import login_required, current_user
 from OnePiece_app.models import Affiliation, Character, User, CharacterWithDevilFruit, CharacterWithHaki
 from OnePiece_app.main.forms import AffiliationForm, CharactersForm
-from OnePiece_app.extensions import db
+from OnePiece_app import db
 
 main = Blueprint("main", __name__)
 
