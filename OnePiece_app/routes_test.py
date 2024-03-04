@@ -1,32 +1,34 @@
+import os
 import pytest
-from flask import url_for
-from OnePiece_app.main import create_app
-from OnePiece_app.extensions import db
+from flask import Flask
+from OnePiece_app.main import db
+from OnePiece_app.main.routes import main
 from OnePiece_app.models import Affiliation, Character, User
+from dotenv import load_dotenv
 
+load_dotenv()
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def app():
-    app = create_app('config.TestingConfig')
-    return app
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.register_blueprint(main)  # Register the main blueprint
+    with app.app_context():
+        db.init_app(app)
+        db.create_all()
+        print("all routes", app.url_map)
+        yield app
+        db.session.remove()
+        db.drop_all()
 
-
-@pytest.fixture
+@pytest.fixture(scope='module')
 def client(app):
     return app.test_client()
 
-
-@pytest.fixture
-def init_database():
-    db.create_all()
-    yield
-    db.drop_all()
-
-
-def test_homepage(client, init_database):
+def test_homepage(client):
     response = client.get('/')
     assert response.status_code == 200
-
 
 def test_new_affiliation(client, init_database):
     response = client.post('/new_affiliation', data=dict(title='New Affiliation'), follow_redirects=True)
